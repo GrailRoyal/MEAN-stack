@@ -15,7 +15,7 @@
 ### 1. Initial Environment Setup
 
 ### EC2 Instance Setup
-Create an EC2 instance for which the whole architecture will be built upon
+Create an EC2 instance upon which the whole architecture will be built
  I have made use of an Ubuntu EC2 machine
 ![aws-machine.png](https://github.com/GrailRoyal/MEAN-stack/blob/images/aws-machine.png)
 
@@ -33,7 +33,7 @@ sudo apt-get install -y nodejs npm
 ![EC2 set up image](https://github.com/GrailRoyal/MEAN-stack/blob/images/node.png)
 
 # Install MongoDB
-To install MongoDB, there are a few steps we need to follow because of the approach this project requires, we will be installing MongoDB directly on our machine
+To install MongoDB, there are a few steps we need to follow. Because of the approach this project requires, we will be installing MongoDB directly on our machine
 ![EC2 set up image](https://github.com/GrailRoyal/MEAN-stack/blob/images/mongodb%20install.png)
 
 #### Steps
@@ -57,7 +57,7 @@ The next command updates the package repository for Ubuntu so that the machine c
 ```
 sudo apt-get update
 ```
-This is to Install MongoDB onto our Ubuntu Machine
+This is to Install MongoDB on our Ubuntu Machine
 sudo apt-get install -y mongodb-org
 
 
@@ -317,7 +317,7 @@ visit https://git.new/pathToRegexpError for info
 Error: Cannot find module '/home/ubuntu/Books/public/server.js'
 ```
 
-**Cause**: Running server from wrong directory
+**Cause**: Running the server from the wrong directory
 
 **Solution**:
 ```bash
@@ -344,8 +344,8 @@ Request limit exceeded. Account 546769761885 has been throttled on ec2:RunInstan
 2. **Create Project Structure**: Set up directories and files as shown above
 3. **Configure MongoDB**: Ensure service is running and connected
 4. **Avoid Route Conflicts**: Keep catch-all routes in server.js only
-5. **Run Application**: Start from correct directory with `node server.js`
+5. **Run Application**: Start from the correct directory with `node server.js`
 
 ---
 
-This project demonstrates a complete full-stack JavaScript application with backend API, database integration, and proper error handling throughout the development process. The troubleshooting journey highlights common issues developers face when setting up Node.js/Express/MongoDB applications.
+This project demonstrates a complete full-stack JavaScript application with a backend API, database integration, and proper error handling throughout the development process. The troubleshooting journey highlights common issues developers face when setting up Node.js/Express/MongoDB applications.
