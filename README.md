@@ -1,26 +1,14 @@
 # Books Management System - Complete Setup Guide
 
-A Node.js Express application with MongoDB for managing books. This document includes the complete setup process and all troubleshooting steps encountered during development.
-
 ## Features
 
-- ✅ Create, read, and delete books
-- ✅ MongoDB integration with Mongoose ODM
-- ✅ RESTful API endpoints
-- ✅ Static file serving
-- ✅ Express.js web framework
+-  Create, read, and delete books
+-  MongoDB integration with Mongoose ODM
+-  RESTful API endpoints
+-  Static file serving
+-  Express.js web framework
 
 
-## Book Schema
-
-```javascript
-{
-  name: String,
-  isbn: String,
-  author: String,
-  pages: Number
-}
-```
 
 ##  Setup Steps and Approach
 
@@ -29,7 +17,7 @@ A Node.js Express application with MongoDB for managing books. This document inc
 ### EC2 Instance Setup
 Create an EC2 instance for which the whole arcitecture will be built upon
  i have made use of an Ubuntu EC2 machine
-
+![EC2 set up image](https://github.com/GrailRoyal/mern-stack/blob/images/Mern-AWS-machine.png)
 
 
 # Update system packages
@@ -42,9 +30,11 @@ sudo apt-get update
 ```
 sudo apt-get install -y nodejs npm
 ```
+![EC2 set up image](https://github.com/GrailRoyal/mern-stack/blob/images/Mern-AWS-machine.png)
 
 # Install MongoDB
-To install momgodb there few steps we need to follow because of the approuch this project require we will be installing mongodb directly on our machine
+To install mongodb there few steps we need to follow because of the approch this project require we will be installing mongodb directly on our machine
+![EC2 set up image](https://github.com/GrailRoyal/mern-stack/blob/images/Mern-AWS-machine.png)
 
 #### Steps
 This command Installs both GnuPG and curl on your system
@@ -63,7 +53,7 @@ Installs MongoDB 7.0 and all related components.
 echo "deb [ arch=amd64,arm64 signed-by=/usr/share/keyrings/mongodb-server-7.0.gpg ] https://repo.mongodb.org/apt/ubuntu jammy/mongodb-org/7.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-7.0.list
 
 ```
-The next command updates the pacakge repositigy for Ubuntu so as for the ,machine to update the new Mongodb reposotiry added
+The next command updates the package repositigy for Ubuntu so as for the ,machine to update the new Mongodb reposotiry added
 ```
 sudo apt-get update
 ```
@@ -77,6 +67,7 @@ checking the Status of our mongodb so as to know the state  as well as starting 
 sudo systemctl start mongod
 sudo systemctl enable mongod
 ```
+![EC2 set up image](https://github.com/GrailRoyal/mern-stack/blob/images/Mern-AWS-machine.png)
 
 
 
@@ -101,7 +92,7 @@ cd Books
 touch server.js apps/routes.js models/book.js
 ```
 
-## 📁 File Contents
+##  File Contents
 
 ### `server.js`
 ```javascript
@@ -212,26 +203,45 @@ const bookSchema = new mongoose.Schema({
 module.exports = mongoose.model('Book', bookSchema);
 ```
 
-## 🔧 Complete Troubleshooting Journey
 
-### 🚨 Issue 1: MongoDB Installation Problems
+##  Running the Application
 
-**Error**: 
-```
-E: Unable to locate package https://www.mongodb.org/static/pgp
-E: Couldn't find any package by glob 'https://www.mongodb.org/static/pgp'
-```
-
-**Cause**: Incorrect apt-get command syntax with duplicate curl commands
-
-**Solution**:
 ```bash
-# Separate package installation from GPG key download
-sudo apt-get install -y gnupg curl
-curl -fsSL https://www.mongodb.org/static/pgp/server-7.0.asc | sudo gpg --dearmor -o /usr/share/keyrings/mongodb-server-7.0.gpg
+# Navigate to project directory
+cd ~/Books
+
+# Start MongoDB service
+sudo systemctl start mongod
+
+# Start the application
+node server.js
 ```
 
-### 🚨 Issue 2: Module Not Found Errors
+##  Verification
+
+### 1. Check server status
+Visit `http://your-server-ip:3300`
+![EC2 set up image](https://github.com/GrailRoyal/mern-stack/blob/images/Mern-AWS-machine.png)
+
+
+### 2. Test API endpoints
+```bash
+# Get all books
+curl http://localhost:3300/book
+
+# Create a book
+curl -X POST http://localhost:3300/book \
+  -H "Content-Type: application/json" \
+  -d '{"name":"Sample Book","isbn":"1234567890","author":"John Doe","pages":300}'
+
+# Delete a book
+curl -X DELETE http://localhost:3300/book/1234567890
+```
+
+##   Troubleshooting
+
+
+###  Issue 1: Module Not Found Errors
 
 **Error**: 
 ```
@@ -267,7 +277,7 @@ module.exports = mongoose.model('Book', bookSchema);
 EOF
 ```
 
-### 🚨 Issue 3: PathError - Catch-All Route Conflict
+###  Issue 2: PathError - Catch-All Route Conflict
 
 **Error**: 
 ```
@@ -296,7 +306,7 @@ visit https://git.new/pathToRegexpError for info
 // });
 ```
 
-### 🚨 Issue 4: Directory Execution Problems
+###  Issue 3: Directory Execution Problems
 
 **Error**: 
 ```
@@ -312,7 +322,7 @@ cd ~/Books
 node server.js
 ```
 
-### 🚨 Issue 5: AWS EC2 Instance Limits
+###  Issue 4: AWS EC2 Instance Limits
 
 **Error**: 
 ```
@@ -324,74 +334,7 @@ Request limit exceeded. Account 546769761885 has been throttled on ec2:RunInstan
 - Monitored AWS service quotas
 - Implemented efficient resource usage
 
-## 🏃‍♂️ Running the Application
-
-```bash
-# Navigate to project directory
-cd ~/Books
-
-# Start MongoDB service
-sudo systemctl start mongod
-
-# Start the application
-node server.js
-```
-
-## ✅ Verification
-
-### 1. Check server status
-Visit `http://your-server-ip:3300`
-
-### 2. Test API endpoints
-```bash
-# Get all books
-curl http://localhost:3300/book
-
-# Create a book
-curl -X POST http://localhost:3300/book \
-  -H "Content-Type: application/json" \
-  -d '{"name":"Sample Book","isbn":"1234567890","author":"John Doe","pages":300}'
-
-# Delete a book
-curl -X DELETE http://localhost:3300/book/1234567890
-```
-
-## 📊 Project Structure
-```
-Books/
-├── server.js          # Main server file (Port 3300)
-├── apps/
-│   └── routes.js      # API route definitions
-├── models/
-│   └── book.js        # Mongoose book model
-├── public/            # Static files directory
-├── node_modules/      # Dependencies
-└── package.json       # Project configuration
-```
-
-## 💡 Key Learning Points
-
-| Lesson | Description |
-|--------|-------------|
-| **Module Management** | Always ensure required files exist and have proper exports |
-| **Route Conflicts** | Avoid defining catch-all routes in multiple files |
-| **Directory Structure** | Maintain consistent project organization |
-| **Error Handling** | Implement comprehensive try-catch blocks in async routes |
-| **MongoDB Integration** | Proper connection handling and schema definitions |
-
-## 📦 Dependencies
-
-```json
-{
-  "dependencies": {
-    "express": "^4.18.0",
-    "mongoose": "^7.0.0",
-    "body-parser": "^1.20.0"
-  }
-}
-```
-
-## 🎯 Quick Start Summary
+##  Summary
 
 1. **Setup Environment**: Install Node.js, MongoDB, and dependencies
 2. **Create Project Structure**: Set up directories and files as shown above
