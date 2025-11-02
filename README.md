@@ -15,9 +15,9 @@
 ### 1. Initial Environment Setup
 
 ### EC2 Instance Setup
-Create an EC2 instance for which the whole arcitecture will be built upon
- i have made use of an Ubuntu EC2 machine
-![EC2 set up image](https://github.com/GrailRoyal/mern-stack/blob/images/Mern-AWS-machine.png)
+Create an EC2 instance for which the whole architecture will be built upon
+ I have made use of an Ubuntu EC2 machine
+![aws-machine.png](https://github.com/GrailRoyal/MEAN-stack/blob/images/aws-machine.png)
 
 
 # Update system packages
@@ -30,11 +30,11 @@ sudo apt-get update
 ```
 sudo apt-get install -y nodejs npm
 ```
-![EC2 set up image](https://github.com/GrailRoyal/mern-stack/blob/images/Mern-AWS-machine.png)
+![EC2 set up image](https://github.com/GrailRoyal/MEAN-stack/blob/images/node.png)
 
 # Install MongoDB
-To install mongodb there few steps we need to follow because of the approch this project require we will be installing mongodb directly on our machine
-![EC2 set up image](https://github.com/GrailRoyal/mern-stack/blob/images/Mern-AWS-machine.png)
+To install MongoDB, there are a few steps we need to follow because of the approach this project requires, we will be installing MongoDB directly on our machine
+![EC2 set up image](https://github.com/GrailRoyal/MEAN-stack/blob/images/mongodb%20install.png)
 
 #### Steps
 This command Installs both GnuPG and curl on your system
@@ -47,27 +47,28 @@ curl -fsSL https://www.mongodb.org/static/pgp/server-7.0.asc | sudo gpg --dearmo
 ```
 
 Adds MongoDB’s official APT repository to Ubuntu’s package sources.
-Updates the system package list so Ubuntu knows about MongoDB.
+Updates the system package list so that Ubuntu is aware of MongoDB.
 Installs MongoDB 7.0 and all related components.
 ```
 echo "deb [ arch=amd64,arm64 signed-by=/usr/share/keyrings/mongodb-server-7.0.gpg ] https://repo.mongodb.org/apt/ubuntu jammy/mongodb-org/7.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-7.0.list
 
 ```
-The next command updates the package repositigy for Ubuntu so as for the ,machine to update the new Mongodb reposotiry added
+The next command updates the package repository for Ubuntu so that the machine can update the new MongoDB repository added.
 ```
 sudo apt-get update
 ```
-This is to Install Mongodb onto our Ubuntu Machine
+This is to Install MongoDB onto our Ubuntu Machine
 sudo apt-get install -y mongodb-org
+
 
 # Start MongoDB service
 
-checking the Status of our mongodb so as to know the state  as well as starting the Mongodb so that the status can move from inactuve to Active and Running
+Checking the Status of our MongoDB to know the state,  as well as starting the MongoDB so that the status can move from inactive to Active and Running
 ```
 sudo systemctl start mongod
 sudo systemctl enable mongod
 ```
-![EC2 set up image](https://github.com/GrailRoyal/mern-stack/blob/images/Mern-AWS-machine.png)
+[testing mongodb.png](https://github.com/GrailRoyal/MEAN-stack/blob/images/testing%20mongodb.png)
 
 
 
@@ -89,7 +90,7 @@ mkdir -p Books/apps Books/models Books/public
 cd Books
 
 # Create all necessary files
-touch server.js apps/routes.js models/book.js
+touch server.js, apps/routes.js models/book.js
 ```
 
 ##  File Contents
@@ -216,12 +217,15 @@ sudo systemctl start mongod
 # Start the application
 node server.js
 ```
+![app lunch](https://github.com/GrailRoyal/MEAN-stack/blob/images/app%20lunch.png)
+
 
 ##  Verification
 
 ### 1. Check server status
 Visit `http://your-server-ip:3300`
-![EC2 set up image](https://github.com/GrailRoyal/mern-stack/blob/images/Mern-AWS-machine.png)
+
+![book-app](https://github.com/GrailRoyal/MEAN-stack/blob/images/book-app.png)
 
 
 ### 2. Test API endpoints
